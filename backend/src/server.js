@@ -33,7 +33,6 @@ app.delete("/api/notes/:id", (req, res) => {
 }); // Endpoint to delete a note 
 
 */
-
 app.listen(3000, () => {
   console.log('Server is running on port 3000')
 }); // Start the server on port 3000 
