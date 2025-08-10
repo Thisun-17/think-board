@@ -1,10 +1,23 @@
 import express from 'express'
 // Import the express module
 import notesRoutes from './routes/notesRoutes.js'
-// Import the notesRoutes module
+// Import the notes routes from notesRoutes.js
+import { connectDB } from './config/db.js';
+// Import the connectDB function from db.js 
+import dotenv from 'dotenv';   
+// Import the dotenv module to load environment variables
+
+dotenv.config();
+// Load environment variables from .env file 
+
 
 const app = express();
 // Create an instance of an Express application
+const PORT = process.env.PORT || 3000;
+// Set the port to the value from environment variables or default to 3000
+
+connectDB();
+// Connect to the MongoDB database
 
 app.use("/api/notes", notesRoutes);
 
@@ -33,6 +46,7 @@ app.delete("/api/notes/:id", (req, res) => {
 }); // Endpoint to delete a note 
 
 */
-app.listen(3000, () => {
-  console.log('Server is running on port 3000')
-}); // Start the server on port 3000 
+app.listen(PORT, () => {
+  console.log('Server is running on port:', PORT);
+  // Log the port on which the server is running
+}); 
