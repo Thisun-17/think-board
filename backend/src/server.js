@@ -21,7 +21,6 @@ connectDB();
 app.use(express.json());
 // Middleware to parse JSON request bodies     
 
-
 app.use("/api/notes", notesRoutes);
 
 // What is an Endpoint?

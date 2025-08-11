@@ -17,6 +17,6 @@ const noteSchema = new mongoose.Schema({
 // Create a model from the schema 
 
 const Note = mongoose.model('Note', noteSchema);
-
+ 
 export default Note;
 // Export the Note model for use in other parts of the application
