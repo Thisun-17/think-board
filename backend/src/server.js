@@ -6,6 +6,8 @@ import { connectDB } from './config/db.js';
 // Import the connectDB function from db.js 
 import dotenv from 'dotenv';   
 // Import the dotenv module to load environment variables
+import ratelimiter from './middleware/rateLimiter.js';
+// Import the rate limiter middleware from rateLimiter.js
 
 dotenv.config();
 // Load environment variables from .env file 
@@ -16,19 +18,18 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 // Set the port to the value from environment variables or default to 3000
 
-connectDB();
-// Connect to the MongoDB database
-
 // Middleware
 app.use(express.json()); // this middleware parses JSON request bodies
+app.use(ratelimiter);
 
-// our simple custom middleware 
+// our simple custom middleware  
+/*  
 app.use((req, res, next) => { 
   console.log(`Request Method: ${req.method}, Request URL: ${req.url}`);
   next();
 });
+*/
 // Middleware to log request method and URL for debugging 
-
 
 
 app.use("/api/notes", notesRoutes);
@@ -58,7 +59,11 @@ app.delete("/api/notes/:id", (req, res) => {
 }); // Endpoint to delete a note 
 
 */
-app.listen(PORT, () => {
+
+connectDB().then(() => { // Connect to the MongoDB database
+  // Start the server after successful database connection
+  app.listen(PORT, () => {
   console.log('Server is running on port:', PORT);
   // Log the port on which the server is running
+  });
 }); 
