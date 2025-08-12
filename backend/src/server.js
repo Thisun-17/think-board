@@ -21,9 +21,9 @@ connectDB();
 
 // Middleware
 app.use(express.json()); // this middleware parses JSON request bodies
-// our simple custom middleware 
 
-app.use((req, res, next) => {
+// our simple custom middleware 
+app.use((req, res, next) => { 
   console.log(`Request Method: ${req.method}, Request URL: ${req.url}`);
   next();
 });
