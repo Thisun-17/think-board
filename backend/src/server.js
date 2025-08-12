@@ -18,8 +18,18 @@ const PORT = process.env.PORT || 3000;
 
 connectDB();
 // Connect to the MongoDB database
-app.use(express.json());
-// Middleware to parse JSON request bodies     
+
+// Middleware
+app.use(express.json()); // this middleware parses JSON request bodies
+// our simple custom middleware 
+
+app.use((req, res, next) => {
+  console.log(`Request Method: ${req.method}, Request URL: ${req.url}`);
+  next();
+});
+// Middleware to log request method and URL for debugging 
+
+
 
 app.use("/api/notes", notesRoutes);
 
