@@ -23,8 +23,8 @@ const PORT = process.env.PORT || 3000;
 // Middleware
 app.use(
   cors({
-    origin: 'http://localhost:5173',
-})
+    origin: "http://localhost:5173" ,
+  })
 ); // Enable CORS for all routes
 app.use(express.json()); // this middleware parses JSON request bodies
 app.use(ratelimiter);
