@@ -8,6 +8,8 @@ import dotenv from 'dotenv';
 // Import the dotenv module to load environment variables
 import ratelimiter from './middleware/rateLimiter.js';
 // Import the rate limiter middleware from rateLimiter.js
+import cors from 'cors';
+// Import the CORS middleware to handle cross-origin requests
 
 dotenv.config();
 // Load environment variables from .env file 
@@ -19,8 +21,14 @@ const PORT = process.env.PORT || 3000;
 // Set the port to the value from environment variables or default to 3000
 
 // Middleware
+app.use(
+  cors({
+    origin: 'http://localhost:5173',
+})
+); // Enable CORS for all routes
 app.use(express.json()); // this middleware parses JSON request bodies
 app.use(ratelimiter);
+
 
 // our simple custom middleware  
 /*  
