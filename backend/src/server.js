@@ -10,6 +10,7 @@ import ratelimiter from './middleware/rateLimiter.js';
 // Import the rate limiter middleware from rateLimiter.js
 import cors from 'cors';
 // Import the CORS middleware to handle cross-origin requests
+import path from 'path';
 
 dotenv.config();
 // Load environment variables from .env file 
@@ -19,13 +20,17 @@ const app = express();
 // Create an instance of an Express application
 const PORT = process.env.PORT || 3000;
 // Set the port to the value from environment variables or default to 3000
+const __dirname = path.resolve();
 
 // Middleware
+if (process.env.NODE_ENV !== 'production') {
 app.use(
   cors({
     origin: "http://localhost:5173" ,
   })
 ); // Enable CORS for all routes
+}
+
 app.use(express.json()); // this middleware parses JSON request bodies
 app.use(ratelimiter);
 
@@ -67,6 +72,16 @@ app.delete("/api/notes/:id", (req, res) => {
 }); // Endpoint to delete a note 
 
 */
+
+
+if(process.env.NODE_ENV === "production") {
+    app.use(express.static(path.join(__dirname,"../frontend/dist"))); 
+
+  app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend","dist","index.html"));
+  // Serve the index.html file for all other routes
+});
+}
 
 connectDB().then(() => { // Connect to the MongoDB database
   // Start the server after successful database connection
