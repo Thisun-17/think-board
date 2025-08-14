@@ -57,7 +57,7 @@ const NoteDetailPage = () => {
     try {
       await api.put(`/notes/${id}`, note);
       toast.success('Note updated successfully!');
-      
+      navigate("/"); // Redirect to notes list after saving
     } catch (error) {
       console.log('Failed to update note:', error);
       toast.error('Failed to update note. Please try again later.');  
