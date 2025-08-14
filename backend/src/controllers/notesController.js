@@ -52,10 +52,10 @@ export async function updateNote (req, res) {
     res.status(200).json({updateNote});
     // Respond with a success message
   } catch (error) {
-     
-  }console.error("Error in updateNote:", error.message);
+    console.error("Error in updateNote:", error.message);
     // Log the error to the console
     res.status(500).json({ message: 'Internal server error' }); 
+  }
 }
 
 export async function deleteNote   (req, res) {
