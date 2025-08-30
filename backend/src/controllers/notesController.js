@@ -2,7 +2,7 @@ import Note from '../models/Note.js'; // Import the Note model
 
 export async function getAllNotes(req, res) {
   try {
-    const notes = await Note.find().sort({ creatdAt: -1 }); // Fetch all notes from the database // -1 will sort in descending order by createdAt field(newest first)
+    const notes = await Note.find().sort({ createdAt: -1 }); // Fetch all notes from the database // -1 will sort in descending order by createdAt field(newest first)
     res.status(200).json(notes); // Respond with the notes in JSON format 
   } catch (error) {
     console.error('Error in getAllNotes:', error.message);
