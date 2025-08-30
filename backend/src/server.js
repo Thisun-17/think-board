@@ -6,7 +6,7 @@ import { connectDB } from './config/db.js';
 // Import the connectDB function from db.js 
 import dotenv from 'dotenv';   
 // Import the dotenv module to load environment variables
-import ratelimiter from './middleware/rateLimiter.js';
+//import ratelimiter from './middleware/rateLimiter.js';
 // Import the rate limiter middleware from rateLimiter.js
 import cors from 'cors';
 // Import the CORS middleware to handle cross-origin requests
@@ -32,7 +32,7 @@ app.use(
 }
 
 app.use(express.json()); // this middleware parses JSON request bodies
-app.use(ratelimiter);
+//app.use(ratelimiter);
 
 
 // our simple custom middleware  
